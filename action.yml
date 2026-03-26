@@ -7,6 +7,10 @@ branding:
   color: "orange"
 
 inputs:
+  token:
+    description: GitHub token for API access (used for merge-base detection in PRs)
+    required: false
+    default: '${{ github.token }}'
   mode:
     description: Operation to perform. Can be 'upload' or 'summary'.
     required: true
@@ -91,6 +95,7 @@ runs:
       id: resolve
       uses: auroralabs-loci/loci-action/.github/actions/resolve@v1
       with:
+        token:     ${{ inputs.token }}
         project:   ${{ inputs.project }}
         target:    ${{ inputs.target }}
         base:      ${{ inputs.base }}
